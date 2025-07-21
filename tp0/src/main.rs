@@ -43,64 +43,143 @@ fn main() {
     }
 
     // A noter que  1..5
-         //  ..  intervalle exculsif ( fin exclue ) : 1,2,3,4
-         // ..=  intervalle inclusif ( fin incluse ) : 1,2,3,4,5
+    //  ..  intervalle exculsif ( fin exclue ) : 1,2,3,4
+    // ..=  intervalle inclusif ( fin incluse ) : 1,2,3,4,5
 
-         // Exemple de tableau : itérer sur un tableau 
+    // Exemple de tableau : itérer sur un tableau 
 
-         let  voitures = ["jeep", "renault", "bmw"];
-         for voiture in voitures {
-            println!("Voiture : {}", voiture);
-         }
+    let  voitures = ["jeep", "renault", "bmw"];
+    for voiture in voitures {
+       println!("Voiture : {}", voiture);
+    }
 
-         //    for ( index, valeur) in  collection.iter().enumerate(){
-         //  on peut utiliser index et valeur ici }
+    //    for ( index, valeur) in  collection.iter().enumerate(){
+    //  on peut utiliser index et valeur ici }
 
-         // je reprends l'exemple de voiture 
-         for (i,voiture) in voitures.iter().enumerate(){
-            println!("Index {} : {}", i, voiture);
-         }
-         // iter(): crée un itérateur sur la collection sans le consommer
-         // enumerate: transforme l'itérateur en une séquence de index,valeur 
+    // je reprends l'exemple de voiture 
+    for (i,voiture) in voitures.iter().enumerate(){
+       println!("Index {} : {}", i, voiture);
+    }
+    // iter(): crée un itérateur sur la collection sans le consommer
+    // enumerate: transforme l'itérateur en une séquence de index,valeur 
 
-         // Exemple de vecteur 
+    // Exemple de vecteur 
 
-         let noms = vec![String::from("Kevin"), String::from("Nourdine")];
-         for (i,nom) in noms.iter().enumerate(){
-            println!("Nom {} :{}", i, nom);
-         }
+    let noms = vec![String::from("Kevin"), String::from("Nourdine")];
+    for (i,nom) in noms.iter().enumerate(){
+       println!("Nom {} :{}", i, nom);
+    }
 
-         // Usage de enumerate dans un cas réel : Afficher un Menu avec numéro et choix
+    // Usage de enumerate dans un cas réel : Afficher un Menu avec numéro et choix
 
-         let options = ["Afficher solde","Retrait","Liste comptes","Quitter"];
+    let options = ["Afficher solde","Retrait","Liste comptes","Quitter"];
 
-         println!("Menu:");
-         for ( i,option) in options.iter().enumerate(){
-            // afficher chaque option et on commence par 1 
-            println!("{}. {}", i+1, option); 
-         }
+    println!("Menu:");
+    for ( i,option) in options.iter().enumerate(){
+       // afficher chaque option et on commence par 1 
+       println!("{}. {}", i+1, option); 
+    }
 
-         println!("Veuillez saisir un numéro de votre choix:");
+    println!("Veuillez saisir un numéro de votre choix:");
 
-         let mut choix = String::new();
-         io::stdin().read_line(&mut choix).expect("Attention erreur de lecture");
-         
-         let choix:usize = match choix.trim().parse(){
-            Ok(num) => num,
-            Err(_)=> {
-                println!("Veuillez saisir un numero valide");
-                return;
-            }
-         };
+    let mut choix = String::new();
+    io::stdin().read_line(&mut choix).expect("Attention erreur de lecture");
+    
+    let choix:usize = match choix.trim().parse(){
+       Ok(num) => num,
+       Err(_)=> {
+           println!("Veuillez saisir un numero valide");
+           return;
+       }
+    };
 
-         if choix == 0 || choix > options.len(){
-            println!(" choix hors système !! limite système ");
-         } else {
-            println!("Vous avez sélectionné : {}", options[choix-1]);
-            // ici on peut exécuter une action selon choix dans options 
-         }
+    if choix == 0 || choix > options.len(){
+       println!(" choix hors système !! limite système ");
+    } else {
+       println!("Vous avez sélectionné : {}", options[choix-1]);
+       // ici on peut exécuter une action selon choix dans options 
+    }
+
+    //tableaux
+    let tab:[i32;4] = [1,2,3,4];
+    // pour éviter le warning, _ devant le nom de la variable
+    let _tab2:[i32;4] = [1,2,3,4];
+
+    for i in 0..tab.len(){
+       println!("le tableau tab {}", tab[i]);
+
+    }
+    for &elt in &tab{
+       println!("l'element est {}", elt);
+    }
+
+
+    println!("**************loop****************");
+    let mut compteur = 0;
+    loop {
+        println!(" Compteur: {}",compteur);
+        compteur+=1;
+    if compteur == 3{
+        break; // on sort de la boucle quand compteur atteint 3
+    }
+    }
+
+    println!("*******while*************");
+    let mut compteur2 = 0;
+    while compteur2<4{
+        println!("Compteur 2 = {}", compteur2);
+        compteur2 +=1;
+    }
+
+    struct Salarie{
+        nom: String,
+        ville: String,
+        age: u32
+    }
+
+    let kevin = Salarie{
+    nom: String::from("Kevin"),
+    ville: String::from("Lyon"), 
+    age: 666                      
+    };
+
+    println!("Name: {} Town: {} Age: {}", kevin.nom, kevin.ville, kevin.age);
+
+
+    //match
+    let number = 5;
+
+    match number {
+    1 => println!("Un"),
+    2 => println!("Deux"),
+    3 => println!("Trois"),
+    4 => println!("Quatre"),
+    5 => println!("Cinq"),
+    6 => println!("Six"),
+    7 => println!("Sept"),
+    8 => println!("Huit"),
+    9 => println!("Neuf"),
+    10 => println!("Dix"),
+    _ => println!("Nombre non reconnu")
+}
+
+impl Salarie{
+    fn afficher(&self){
+        println!("La personne suivante: {} est convoquée ", self.nom);
+    }
+}
+
+let salarie = Salarie{
+    nom:"Alexandre".to_string(),
+    ville:"Hell".to_string(),
+    age:666,
+};
+
+salarie.afficher();
+
 
 }
+
 
 fn addition(n1:i32, n2:i32) -> i32{
         return n1+n2;

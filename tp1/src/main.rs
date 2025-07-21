@@ -30,6 +30,12 @@ impl CompteBancaire {
     //param: &mut (mutable ref to instance, allow modification of the value in the account), montant
     //return bool (return success of the operation)
     fn retrait(&mut self, montant: f32) -> bool {
+        // BONUS: stop negative withdrawal
+        if montant <= 0.0 {
+            println!("Le montant doit être positif");
+            return false;
+        }
+        
         if montant <= self.solde {
             self.solde -= montant;
             println!("Retrait de {:.2}€ effectué", montant);
@@ -37,6 +43,27 @@ impl CompteBancaire {
         } else {
             println!("Solde insuffisant");
             false
+        }
+    }
+
+    // BONUS: deposit function
+    fn depot(&mut self, montant: f32) -> bool {
+        // stop negatif deposit
+        if montant <= 0.0 {
+            println!("Le montant doit être positif");
+            return false;
+        }
+        
+        self.solde += montant;
+        println!("Dépôt de {:.2}€ effectué", montant);
+        true
+    }
+
+    // BONUS: rename function
+    fn renommer(&self, nouveau_nom: String) -> CompteBancaire {
+        CompteBancaire {
+            nom: nouveau_nom,
+            solde: self.solde,
         }
     }
 }
@@ -52,8 +79,8 @@ fn main() {
         CompteBancaire::new(String::from("Bob"), 750.0),
     ];
 
-    //options to choose from
-    let options = ["Afficher solde", "Retrait", "Liste comptes", "Quitter"];
+    //options to choose from - BONUS: ajout de Dépôt et Renommer
+    let options = ["Afficher solde", "Retrait", "Dépôt", "Liste comptes", "Renommer compte", "Quitter"];
 
     //main loop
     loop {
@@ -79,12 +106,14 @@ fn main() {
             }
         };
 
-        //pattern matching
+        //pattern matching - BONUS: add new option
         match choix {
             1 => afficher_solde(&comptes),
             2 => effectuer_retrait(&mut comptes),
-            3 => lister_comptes(&comptes),
-            4 => {
+            3 => effectuer_depot(&mut comptes),
+            4 => lister_comptes(&comptes),
+            5 => renommer_compte(&mut comptes),
+            6 => {
                 println!("Au revoir!");
                 break;
             }
@@ -140,6 +169,65 @@ fn effectuer_retrait(comptes: &mut [CompteBancaire]) {
     };
 
     comptes[index].retrait(montant);
+}
+
+// BONUS: function to add money
+fn effectuer_depot(comptes: &mut [CompteBancaire]) {
+    println!("Quel compte? (0-{}):", comptes.len() - 1);
+    let mut input = String::new();
+    io::stdin().read_line(&mut input).expect("Erreur lecture");
+    
+    let index: usize = match input.trim().parse() {
+        Ok(num) => num,
+        Err(_) => return,
+    };
+
+    if index >= comptes.len() {
+        println!("Compte inexistant");
+        return;
+    }
+
+    println!("Montant à déposer:");
+    let mut montant_str = String::new();
+    io::stdin().read_line(&mut montant_str).expect("Erreur lecture");
+
+    let montant: f32 = match montant_str.trim().parse() {
+        Ok(m) => m,
+        Err(_) => {
+            println!("Montant invalide");
+            return;
+        }
+    };
+
+    comptes[index].depot(montant);
+}
+
+// BONUS: function to rename account
+fn renommer_compte(comptes: &mut [CompteBancaire]) {
+    println!("Quel compte renommer? (0-{}):", comptes.len() - 1);
+    let mut input = String::new();
+    io::stdin().read_line(&mut input).expect("Erreur lecture");
+    
+    let index: usize = match input.trim().parse() {
+        Ok(num) => num,
+        Err(_) => return,
+    };
+
+    if index >= comptes.len() {
+        println!("Compte inexistant");
+        return;
+    }
+
+    println!("Nouveau nom:");
+    let mut nouveau_nom = String::new();
+    io::stdin().read_line(&mut nouveau_nom).expect("Erreur lecture");
+    let nouveau_nom = nouveau_nom.trim().to_string();
+
+    // Use rename which create a new account
+    let nouveau_compte = comptes[index].renommer(nouveau_nom);
+    comptes[index] = nouveau_compte;
+    
+    println!("Compte renommé avec succès!");
 }
 
 //function to list accounts
