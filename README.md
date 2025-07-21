@@ -1,10 +1,10 @@
 # Rust - Cours Basique
 
 Apprentissage d'un nouveau langage 
-Le fait que le langage soit optimisé est sympa (étude faite en 2021 qui le montre dans le top 3 des languages en termes de performance sur plusieurs échelles)
-https://haslab.github.io/SAFER/scp21.pdf
-Mais ce n'est pas un langage adapté au Master IA et Big DATA, et il rejoindra donc la liste des langages que j'ai vu, mais que je n'utiliserais pas dans le future
-(JAVA, Javascript, PHP, TypeScript, Scala, et maintenant Rust)
+- Le fait que le langage soit optimisé est sympa (étude faite en 2021 qui le montre dans le top 3 des languages en termes de performance sur plusieurs échelles)
+- https://haslab.github.io/SAFER/scp21.pdf
+- Mais ce n'est pas un langage adapté au Master IA et Big DATA, et il rejoindra donc la liste des langages que j'ai vu, mais que je n'utiliserais pas dans le future
+- (JAVA, Javascript, PHP, TypeScript, Scala, et maintenant Rust)
 
 ## Types de données
 
