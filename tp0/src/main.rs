@@ -1,0 +1,111 @@
+use std::io;
+
+fn main() {
+
+    let name = "Ryan";
+    let age: u32= 30;
+    //let dad_age:u32= 70;
+    let temperature: f32= 14.6;
+    //i32 32 signé -2XXX à 2XXXXXXXX
+    //u32 32 non signé 0 à 4XXXXXXXX
+    // i64 64  signé grands intervalles
+    //u8 non signé 0 - 225
+
+    println!("Hello, world!");
+    println!("I'm {} and I'm {} years old",name, age);
+    println!("it's {} today", temperature);
+
+    //2. les fonctions : 
+        // fn défini une fonction
+        // &str est de type chaine de caractère (référence)
+        // On créé une fonction addition() qui retourne une somme et on l'appelle depuis le main
+
+    
+
+    let age_combined = addition(7, 8);
+    println!("Somme : {}",age_combined);
+
+    let hi= say_hello("John");
+    println!("{}",hi);
+
+
+    //les conditions les boucles
+    let number = 16;
+        if number%2 ==0{
+            println!("Pair");
+        } else {
+            println!("Impair");
+        }
+
+    //boucle
+    for i in 1..=10{
+        println!(" i = {}",i);
+    }
+
+    // A noter que  1..5
+         //  ..  intervalle exculsif ( fin exclue ) : 1,2,3,4
+         // ..=  intervalle inclusif ( fin incluse ) : 1,2,3,4,5
+
+         // Exemple de tableau : itérer sur un tableau 
+
+         let  voitures = ["jeep", "renault", "bmw"];
+         for voiture in voitures {
+            println!("Voiture : {}", voiture);
+         }
+
+         //    for ( index, valeur) in  collection.iter().enumerate(){
+         //  on peut utiliser index et valeur ici }
+
+         // je reprends l'exemple de voiture 
+         for (i,voiture) in voitures.iter().enumerate(){
+            println!("Index {} : {}", i, voiture);
+         }
+         // iter(): crée un itérateur sur la collection sans le consommer
+         // enumerate: transforme l'itérateur en une séquence de index,valeur 
+
+         // Exemple de vecteur 
+
+         let noms = vec![String::from("Kevin"), String::from("Nourdine")];
+         for (i,nom) in noms.iter().enumerate(){
+            println!("Nom {} :{}", i, nom);
+         }
+
+         // Usage de enumerate dans un cas réel : Afficher un Menu avec numéro et choix
+
+         let options = ["Afficher solde","Retrait","Liste comptes","Quitter"];
+
+         println!("Menu:");
+         for ( i,option) in options.iter().enumerate(){
+            // afficher chaque option et on commence par 1 
+            println!("{}. {}", i+1, option); 
+         }
+
+         println!("Veuillez saisir un numéro de votre choix:");
+
+         let mut choix = String::new();
+         io::stdin().read_line(&mut choix).expect("Attention erreur de lecture");
+         
+         let choix:usize = match choix.trim().parse(){
+            Ok(num) => num,
+            Err(_)=> {
+                println!("Veuillez saisir un numero valide");
+                return;
+            }
+         };
+
+         if choix == 0 || choix > options.len(){
+            println!(" choix hors système !! limite système ");
+         } else {
+            println!("Vous avez sélectionné : {}", options[choix-1]);
+            // ici on peut exécuter une action selon choix dans options 
+         }
+
+}
+
+fn addition(n1:i32, n2:i32) -> i32{
+        return n1+n2;
+    }
+
+fn say_hello(nom:&str) -> String{
+    format!("Bonjour {}",nom)
+}
