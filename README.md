@@ -1,13 +1,75 @@
 # Rust - Cours Basique
 
-Apprentissage d'un nouveau langage 
-- Le fait que le langage soit optimisé est sympa (étude faite en 2021 qui le montre dans le top 3 des languages en termes de performance sur plusieurs échelles)
+Apprentissage d'un nouveau langage avec focus sur la programmation réseau.
+
+---
+
+# TPs Réseau
+
+## TP 7 - DNS Client/Server
+Simple DNS server and client implementation using UDP.
+
+```bash
+cd tp7_dns
+cargo build
+
+# Terminal 1 - Server (requires sudo for port 53)
+sudo cargo run --bin dns_server
+
+# Terminal 2 - Client  
+cargo run --bin dns_client
+# Test with: example.com, google.com, localhost
+```
+<img width="1482" height="775" alt="image" src="https://github.com/user-attachments/assets/781f9adb-8aba-483e-8848-c2a70042e7e7" />
+
+## TP 8 - Custom Protocol
+JSON-based messaging protocol over TCP with authentication.
+
+```bash
+cd tp8_protocol
+cargo build
+
+# Terminal 1 - Server
+cargo run --bin protocol_server
+
+# Terminal 2+ - Clients
+cargo run --bin protocol_client
+# Commands: message <text>, list, logout
+```
+<img width="1625" height="904" alt="image" src="https://github.com/user-attachments/assets/8b3c465c-6276-457c-bb72-d379abf99b67" />
+
+## TP 9 - WebSocket Chat
+Real-time chat server using WebSocket protocol.
+
+```bash
+cd tp9_websocket  
+cargo build
+
+# Terminal 1 - Server
+cargo run --bin websocket_server
+
+# Terminal 2+ - Clients
+cargo run --bin websocket_client
+# Type messages, use /quit to exit
+```
+
+<img width="1647" height="933" alt="image" src="https://github.com/user-attachments/assets/051a5534-7dfa-4d48-aec7-c1bff4d5606d" />
+
+---
+
+<details>
+<summary><b>💭 Avis Personnel sur Rust</b></summary>
+
+Le fait que le langage soit optimisé est sympa (étude faite en 2021 qui le montre dans le top 3 des languages en termes de performance sur plusieurs échelles)
 - https://haslab.github.io/SAFER/scp21.pdf
 - Mais ce n'est pas un langage adapté au Master IA et Big DATA, à mon job de data analiste/data scientist, et à mes choix de direction future, ML Engineer.
 - Il rejoindra donc la liste des langages que j'ai vu, mais que je n'utiliserais pas dans le future
 - (JAVA, Javascript, PHP, TypeScript, Scala, et maintenant Rust)
 
-## Types de données
+</details>
+
+<details>
+<summary><b>📊 Types de Données</b></summary>
 
 ### Types entiers
 - `i32` : entier signé sur 32 bits (valeurs de -2,147,483,648 à 2,147,483,647)
@@ -23,7 +85,10 @@ Apprentissage d'un nouveau langage
 - `&str` : référence vers une chaîne de caractères (immutable)
 - `String` : chaîne de caractères dynamique (mutable, peut grandir/rétrécir)
 
-## Variables et mutabilité
+</details>
+
+<details>
+<summary><b>🔧 Variables et Mutabilité</b></summary>
 
 ```rust
 let nom = "Kevin";              // variable immutable
@@ -34,7 +99,10 @@ age = 31;                       // modification possible car mut
 
 **Convention Rust** : utiliser le `snake_case` (jamais de majuscules, underscore pour séparer les mots).
 
-## Fonctions
+</details>
+
+<details>
+<summary><b>⚙️ Fonctions</b></summary>
 
 ### Syntaxe de base
 ```rust
@@ -57,7 +125,10 @@ say_hello("Alice");
 - Pas de `return` explicite nécessaire sur la dernière ligne
 - Le point-virgule transforme une expression en instruction
 
-## Conditions
+</details>
+
+<details>
+<summary><b>🔀 Conditions</b></summary>
 
 ```rust
 let nombre = 16;
@@ -70,7 +141,10 @@ if nombre % 2 == 0 {
 }
 ```
 
-## Boucles et itération
+</details>
+
+<details>
+<summary><b>🔄 Boucles et Itération</b></summary>
 
 ### Boucle for avec range
 ```rust
@@ -104,7 +178,10 @@ for (i, option) in options.iter().enumerate() {
 - `iter()` : crée un itérateur sur la collection sans la consommer
 - `enumerate()` : transforme l'itérateur en séquence (index, valeur)
 
-## Collections
+</details>
+
+<details>
+<summary><b>📦 Collections</b></summary>
 
 ### Tableaux (arrays)
 ```rust
@@ -119,7 +196,10 @@ noms.push(String::from("Bob"));             // ajouter un élément
 println!("Taille : {}", noms.len());        // obtenir la taille
 ```
 
-## Gestion des entrées utilisateur
+</details>
+
+<details>
+<summary><b>⌨️ Gestion des Entrées Utilisateur</b></summary>
 
 ### Lecture simple
 ```rust
@@ -150,7 +230,10 @@ let choix: usize = match choix.trim().parse() {
 - `match` : gestion des cas de succès (`Ok`) et d'erreur (`Err`)
 - `usize` : type d'entier pour les indices de collections
 
-## Pattern Matching avec match
+</details>
+
+<details>
+<summary><b>🔍 Pattern Matching avec match</b></summary>
 
 ```rust
 match choix {
@@ -164,7 +247,10 @@ match choix {
 }
 ```
 
-## Structures (struct)
+</details>
+
+<details>
+<summary><b>🏗️ Structures (struct)</b></summary>
 
 ### Définition et utilisation
 ```rust
@@ -191,7 +277,10 @@ impl CompteBancaire {
 }
 ```
 
-## Gestion de projet avec Cargo
+</details>
+
+<details>
+<summary><b>📦 Gestion de Projet avec Cargo</b></summary>
 
 ### Commandes essentielles
 ```bash
@@ -210,7 +299,10 @@ mon_projet/
     └── main.rs           # Code principal
 ```
 
-## Outils de développement
+</details>
+
+<details>
+<summary><b>🛠️ Outils de Développement</b></summary>
 
 ### Extension VSCode recommandée
 `rust-lang.rust-analyzer` : Fournit l'autocomplétion, la détection d'erreurs, et l'aide au développement.
@@ -222,7 +314,10 @@ println!("Nom : {}, âge : {}", nom, age);   // plusieurs variables
 println!("Prix : {:.2}€", prix);            // 2 décimales
 ```
 
-## Bonnes pratiques
+</details>
+
+<details>
+<summary><b>✅ Bonnes Pratiques</b></summary>
 
 1. **Nommage** : Utiliser le `snake_case` pour les variables et fonctions
 2. **Mutabilité** : Préférer `let` à `let mut` quand possible
@@ -230,56 +325,4 @@ println!("Prix : {:.2}€", prix);            // 2 décimales
 4. **Documentation** : Commenter le code de manière concise
 5. **Types** : Laisser Rust inférer les types quand c'est évident
 
-
-# TPs Réseau
-
-## TP 7 - DNS Client/Server
-Simple DNS server and client implementation using UDP.
-
-```bash
-cd tp7_dns
-cargo build
-
-# Terminal 1 - Server (requires sudo for port 53)
-sudo cargo run --bin dns_server
-
-# Terminal 2 - Client  
-cargo run --bin dns_client
-# Test with: example.com, google.com, localhost
-```
-<img width="1482" height="775" alt="image" src="https://github.com/user-attachments/assets/781f9adb-8aba-483e-8848-c2a70042e7e7" />
-
-
-## TP 8 - Custom Protocol
-JSON-based messaging protocol over TCP with authentication.
-
-```bash
-cd tp8_protocol
-cargo build
-
-# Terminal 1 - Server
-cargo run --bin protocol_server
-
-# Terminal 2+ - Clients
-cargo run --bin protocol_client
-# Commands: message <text>, list, logout
-```
-<img width="1625" height="904" alt="image" src="https://github.com/user-attachments/assets/8b3c465c-6276-457c-bb72-d379abf99b67" />
-
-
-## TP 9 - WebSocket Chat
-Real-time chat server using WebSocket protocol.
-
-```bash
-cd tp9_websocket  
-cargo build
-
-# Terminal 1 - Server
-cargo run --bin websocket_server
-
-# Terminal 2+ - Clients
-cargo run --bin websocket_client
-# Type messages, use /quit to exit
-```
-
-<img width="1647" height="933" alt="image" src="https://github.com/user-attachments/assets/051a5534-7dfa-4d48-aec7-c1bff4d5606d" />
+</details>
