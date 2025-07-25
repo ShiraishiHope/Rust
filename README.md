@@ -247,6 +247,8 @@ sudo cargo run --bin dns_server
 cargo run --bin dns_client
 # Test with: example.com, google.com, localhost
 ```
+<img width="1482" height="775" alt="image" src="https://github.com/user-attachments/assets/781f9adb-8aba-483e-8848-c2a70042e7e7" />
+
 
 ## TP 8 - Custom Protocol
 JSON-based messaging protocol over TCP with authentication.
@@ -262,6 +264,8 @@ cargo run --bin protocol_server
 cargo run --bin protocol_client
 # Commands: message <text>, list, logout
 ```
+<img width="1625" height="904" alt="image" src="https://github.com/user-attachments/assets/8b3c465c-6276-457c-bb72-d379abf99b67" />
+
 
 ## TP 9 - WebSocket Chat
 Real-time chat server using WebSocket protocol.
@@ -277,3 +281,5 @@ cargo run --bin websocket_server
 cargo run --bin websocket_client
 # Type messages, use /quit to exit
 ```
+
+<img width="1647" height="933" alt="image" src="https://github.com/user-attachments/assets/051a5534-7dfa-4d48-aec7-c1bff4d5606d" />
