@@ -229,3 +229,51 @@ println!("Prix : {:.2}€", prix);            // 2 décimales
 3. **Gestion d'erreurs** : Utiliser `match` ou `expect()` pour les opérations pouvant échouer
 4. **Documentation** : Commenter le code de manière concise
 5. **Types** : Laisser Rust inférer les types quand c'est évident
+
+
+# TPs Réseau
+
+## TP 7 - DNS Client/Server
+Simple DNS server and client implementation using UDP.
+
+```bash
+cd tp7_dns
+cargo build
+
+# Terminal 1 - Server (requires sudo for port 53)
+sudo cargo run --bin dns_server
+
+# Terminal 2 - Client  
+cargo run --bin dns_client
+# Test with: example.com, google.com, localhost
+```
+
+## TP 8 - Custom Protocol
+JSON-based messaging protocol over TCP with authentication.
+
+```bash
+cd tp8_protocol
+cargo build
+
+# Terminal 1 - Server
+cargo run --bin protocol_server
+
+# Terminal 2+ - Clients
+cargo run --bin protocol_client
+# Commands: message <text>, list, logout
+```
+
+## TP 9 - WebSocket Chat
+Real-time chat server using WebSocket protocol.
+
+```bash
+cd tp9_websocket  
+cargo build
+
+# Terminal 1 - Server
+cargo run --bin websocket_server
+
+# Terminal 2+ - Clients
+cargo run --bin websocket_client
+# Type messages, use /quit to exit
+```
